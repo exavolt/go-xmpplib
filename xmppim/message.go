@@ -25,11 +25,9 @@ const (
 // ClientMessageAttributes is the base structure for a message stanza. It defines
 // all standard attributes.
 type ClientMessageAttributes struct {
-	XMLName xml.Name      `xml:"jabber:client message"`
-	ID      string        `xml:"id,attr,omitempty"`
-	From    *xmppcore.JID `xml:"from,attr,omitempty"`
-	To      *xmppcore.JID `xml:"to,attr,omitempty"`
-	Type    string        `xml:"type,attr"` // Any of MessageType*
+	xmppcore.StanzaCommonAttributes
+	XMLName xml.Name `xml:"jabber:client message"`
+	Type    string   `xml:"type,attr"` // Any of MessageType*
 }
 
 // ClientMessage is a data structure for a message stanza. It contains
