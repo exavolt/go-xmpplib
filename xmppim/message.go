@@ -36,7 +36,7 @@ type ClientMessageAttributes struct {
 // all standard attributes and sub-elements.
 type ClientMessage struct {
 	ClientMessageAttributes
-	Error   *xmppcore.StanzaError `xml:",omitempty"`
+	Error   *xmppcore.StanzaError  `xml:",omitempty"`
 	Body    []ClientMessageBody    `xml:"body"`
 	Subject []ClientMessageSubject `xml:"subject"`
 	Thread  *ClientMessageThread   `xml:"thread"`

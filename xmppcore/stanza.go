@@ -59,3 +59,11 @@ var (
 func stanzaErrorCondition(local string) StanzaErrorCondition {
 	return StanzaErrorCondition{xml.Name{Space: StanzasNS, Local: local}}
 }
+
+// RFC 6120 § 9.1
+
+type StanzaCommonAttributes struct {
+	To   *JID   `xml:"to,attr,omitempty"`
+	From *JID   `xml:"from,attr,omitempty"`
+	ID   string `xml:"id,attr,omitempty"`
+}
