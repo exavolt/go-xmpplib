@@ -27,7 +27,7 @@ const (
 type ClientMessageAttributes struct {
 	xmppcore.StanzaCommonAttributes
 	XMLName xml.Name `xml:"jabber:client message"`
-	Type    string   `xml:"type,attr"` // Any of MessageType*
+	Type    string   `xml:"type,attr,omitempty"` // Any of MessageType*
 }
 
 // ClientMessage is a data structure for a message stanza. It contains
@@ -42,18 +42,18 @@ type ClientMessage struct {
 
 type ClientMessageBody struct {
 	XMLName xml.Name `xml:"jabber:client body"`
-	Lang    string   `xml:"lang,attr"`
+	Lang    string   `xml:"lang,attr,omitempty"`
 	Text    string   `xml:",chardata"`
 }
 
 type ClientMessageSubject struct {
 	XMLName xml.Name `xml:"jabber:client subject"`
-	Lang    string   `xml:"lang,attr"`
+	Lang    string   `xml:"lang,attr,omitempty"`
 	Text    string   `xml:",chardata"`
 }
 
 type ClientMessageThread struct {
 	XMLName xml.Name `xml:"jabber:client thread"`
-	Parent  string   `xml:"parent,attr"`
+	Parent  string   `xml:"parent,attr,omitempty"`
 	Text    string   `xml:",chardata"`
 }
