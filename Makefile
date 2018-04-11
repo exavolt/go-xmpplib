@@ -1,13 +1,17 @@
 .PHONY: test
 
+PKG_PATH = github.com/exavolt/go-xmpplib
+DEP_IMAGE ?= go-xmpplib-dep
+TESTER_IMAGE ?= go-xmpplib-tester
+
 test:
-	docker build -t go-xmpplib-dep -f dep.dockerfile .
+	docker build -t $(DEP_IMAGE) -f dep.dockerfile .
 	docker run --rm \
-		-v $(CURDIR):/go/src/github.com/exavolt/go-xmpplib \
-		--workdir /go/src/github.com/exavolt/go-xmpplib \
-		go-xmpplib-dep ensure -v -update
-	docker build -t go-xmpplib-tester -f tester.dockerfile .
+		-v $(CURDIR):/go/src/$(PKG_PATH) \
+		--workdir /go/src/$(PKG_PATH) \
+		$(DEP_IMAGE) ensure -update
+	docker build -t $(TESTER_IMAGE) -f tester.dockerfile .
 	docker run --rm \
-		-v $(CURDIR):/go/src/github.com/exavolt/go-xmpplib \
-		--workdir /go/src/github.com/exavolt/go-xmpplib \
-		go-xmpplib-tester test -v ./...
+		-v $(CURDIR):/go/src/$(PKG_PATH) \
+		--workdir /go/src/$(PKG_PATH) \
+		$(TESTER_IMAGE) test -v ./...
