@@ -1,21 +1,25 @@
-package xmppim
-
 // XEP-0359: Unique and Stable Stanza IDs
+package xmppsid
 
-const MessageSIDNamespace = "urn:xmpp:sid:0"
+import (
+	"encoding/xml"
 
-const (
-	MessageSIDStanzaIDElementName = MessageSIDNamespace + " stanza-id"
-	MessageSIDOriginIDElementName = MessageSIDNamespace + " origin-id"
+	"github.com/exavolt/go-xmpplib/xmppcore"
 )
 
-type MessageSIDStanzaID struct {
+const (
+	NS                  = "urn:xmpp:sid:0"
+	StanzaIDElementName = NS + " stanza-id"
+	OriginIDElementName = NS + " origin-id"
+)
+
+type StanzaID struct {
 	XMLName xml.Name      `xml:"urn:xmpp:sid:0 stanza-id"`
 	ID      string        `xml:"id,attr"`
 	By      *xmppcore.JID `xml:"by,attr"`
 }
 
-type MessageSIDOriginID struct {
+type OriginID struct {
 	XMLName xml.Name `xml:"urn:xmpp:sid:0 origin-id"`
 	ID      string   `xml:"id,attr"`
 }
