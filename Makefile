@@ -16,7 +16,7 @@ test:
 	docker run --rm \
 		-v $(CURDIR):/go/src/$(PKG_PATH) \
 		--workdir /go/src/$(PKG_PATH) \
-		$(TESTER_IMAGE) test -v ./...
+		$(TESTER_IMAGE) test ./...
 
 update-dependencies:
 	docker build -t $(DEP_IMAGE) -f dep.dockerfile .
