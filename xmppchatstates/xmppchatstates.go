@@ -1,6 +1,10 @@
 // XEP-0085: Chat State Notifications
 package xmppchatstates
 
+import (
+	"encoding/xml"
+)
+
 const NS = "http://jabber.org/protocol/chatstates"
 
 type ChatState struct {
