@@ -5,8 +5,9 @@ import (
 )
 
 const (
-	StreamStreamElementName = JabberStreamsNS + " stream"
-	StreamErrorElementName  = JabberStreamsNS + " error"
+	StreamStreamElementName   = JabberStreamsNS + " stream"
+	StreamErrorElementName    = JabberStreamsNS + " error"
+	StreamFeaturesElementName = JabberStreamsNS + " features"
 )
 
 // RFC 6120  4.3.2  Streams Features Format
