@@ -8,7 +8,11 @@ import (
 
 const SASLNS = "urn:ietf:params:xml:ns:xmpp-sasl"
 
-const SASLAuthElementName = SASLNS + " auth"
+const (
+	SASLAuthElementName    = SASLNS + " auth"
+	SASLSuccessElementName = SASLNS + " success"
+	SASLFailureElementName = SASLNS + " failure"
+)
 
 // RFC 6120  6.4.1
 type SASLMechanisms struct {
