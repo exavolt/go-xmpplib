@@ -22,3 +22,23 @@ var (
 func chatState(local string) ChatState {
 	return ChatState{xml.Name{Space: NS, Local: local}}
 }
+
+type Active struct {
+	XMLName xml.Name `xml:"http://jabber.org/protocol/chatstates active"`
+}
+
+type Composing struct {
+	XMLName xml.Name `xml:"http://jabber.org/protocol/chatstates composing"`
+}
+
+type Paused struct {
+	XMLName xml.Name `xml:"http://jabber.org/protocol/chatstates paused"`
+}
+
+type Inactive struct {
+	XMLName xml.Name `xml:"http://jabber.org/protocol/chatstates inactive"`
+}
+
+type Gone struct {
+	XMLName xml.Name `xml:"http://jabber.org/protocol/chatstates gone"`
+}
