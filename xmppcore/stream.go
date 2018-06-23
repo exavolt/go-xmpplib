@@ -10,7 +10,7 @@ const (
 	StreamFeaturesElementName = JabberStreamsNS + " features"
 )
 
-// RFC 6120  4.3.2  Streams Features Format
+// RFC 6120 § 4.3.2  Streams Features Format
 
 type NegotiationStreamFeatures struct {
 	XMLName    xml.Name        `xml:"stream:features"`
@@ -19,16 +19,17 @@ type NegotiationStreamFeatures struct {
 	//TODO: allow mods to provide more features
 }
 
-// AuthenticatedStreamFeatures is used on the second stream
+// AuthenticatedStreamFeatures is used in the second stream
 type AuthenticatedStreamFeatures struct {
 	XMLName xml.Name `xml:"stream:features"`
 	Bind    BindBind `xml:"bind"`
 	//TODO: get more features from the mods
 }
 
-// RFC 6120  4.9  Stream Errors
+// RFC 6120 § 4.9  Stream Errors
 
-// RFC 6120  4.9.2
+// StreamError represents a stream error (RFC 6120 § 4.9.2) element.
+//
 //NOTE: the spec says that this element might contain
 // application-specific error condition.
 type StreamError struct {
@@ -37,18 +38,33 @@ type StreamError struct {
 	Text      string `xml:"text"`
 }
 
+func (streamError StreamError) String() string {
+	condition := streamError.Condition.XMLName.Local
+	if condition == "" {
+		condition = "undefined-condition"
+	}
+	if streamError.Text != "" {
+		return condition + ": " + streamError.Text
+	}
+	return condition
+}
+
+// StreamErrorCondition holds condition information about a stream error.
+//
 // Per latest revision of RFC 6120, stream error conditions are empty elements.
 type StreamErrorCondition struct {
 	XMLName xml.Name // Deliberately un-tagged
 }
 
-// RFC 6120 section 4.9.3
+// RFC 6120 § 4.9.3
 var (
 	StreamErrorConditionBadFormat           = streamErrorCondition("bad-format")
 	StreamErrorConditionHostUnknown         = streamErrorCondition("host-unknown")
 	StreamErrorConditionInternalServerError = streamErrorCondition("internal-server-error")
 	StreamErrorConditionInvalidFrom         = streamErrorCondition("invalid-from")
 	StreamErrorConditionNotAuthorized       = streamErrorCondition("not-authorized")
+	StreamErrorConditionSystemShutdown      = streamErrorCondition("system-shutdown")
+	StreamErrorConditionUndefinedCondition  = streamErrorCondition("undefined-condition")
 )
 
 func streamErrorCondition(local string) StreamErrorCondition {
