@@ -30,12 +30,12 @@ type AuthenticatedStreamFeatures struct {
 
 // StreamError represents a stream error (RFC 6120 § 4.9.2) element.
 //
-//NOTE: the spec says that this element might contain
-// application-specific error condition.
+// To add application-specific condition element, embed this
+// struct into application-specific stream error struct.
 type StreamError struct {
-	XMLName   xml.Name `xml:"http://etherx.jabber.org/streams error"`
+	XMLName   xml.Name `xml:"stream:error"`
 	Condition StreamErrorCondition
-	Text      string `xml:"text"`
+	Text      string `xml:"text,omitempty"`
 }
 
 func (streamError StreamError) String() string {
