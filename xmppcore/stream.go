@@ -59,6 +59,7 @@ type StreamErrorCondition struct {
 // RFC 6120 § 4.9.3
 var (
 	StreamErrorConditionBadFormat           = streamErrorCondition("bad-format")
+	StreamErrorConditionConnectionTimeout   = streamErrorCondition("connection-timeout")
 	StreamErrorConditionHostUnknown         = streamErrorCondition("host-unknown")
 	StreamErrorConditionInternalServerError = streamErrorCondition("internal-server-error")
 	StreamErrorConditionInvalidFrom         = streamErrorCondition("invalid-from")
