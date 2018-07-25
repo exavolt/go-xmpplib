@@ -8,7 +8,7 @@ import (
 )
 
 func TestMarshalEmptyQueryResult(t *testing.T) {
-	result := QueryResult{}
+	result := IQQueryResult{}
 	xmlBuf, err := xml.Marshal(&result)
 
 	assert.Nil(t, err)
@@ -18,11 +18,11 @@ func TestMarshalEmptyQueryResult(t *testing.T) {
 }
 
 func TestMarshalBasicQueryResult(t *testing.T) {
-	result := QueryResult{Name: "XMPP Go", Version: "0.9.99"}
+	result := IQQueryResult{Name: "XMPP Go", Version: "1.23.456"}
 	xmlBuf, err := xml.Marshal(&result)
 
 	assert.Nil(t, err)
 	assert.Equal(t,
-		`<query xmlns="jabber:iq:version"><name>XMPP Go</name><version>0.9.99</version></query>`,
+		`<query xmlns="jabber:iq:version"><name>XMPP Go</name><version>1.23.456</version></query>`,
 		string(xmlBuf))
 }

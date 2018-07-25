@@ -6,11 +6,17 @@ import (
 	"encoding/xml"
 )
 
-const NS = "jabber:iq:version"
+const (
+	NS                    = "jabber:iq:version"
+	IQQueryElementName    = NS + " query"
+	IQQueryEncodedElement = `<query xmlns='jabber:iq:version'/>`
+)
 
-const QueryElementName = NS + " query"
+type IQQueryGet struct {
+	XMLName xml.Name `xml:"jabber:iq:version query"`
+}
 
-type QueryResult struct {
+type IQQueryResult struct {
 	XMLName xml.Name `xml:"jabber:iq:version query"`
 	Name    string   `xml:"name"`
 	Version string   `xml:"version"`

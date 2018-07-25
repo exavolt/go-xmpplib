@@ -6,8 +6,9 @@ import (
 )
 
 const (
-	NS          = "urn:xmpp:ping"
-	ElementName = NS + " ping"
+	NS             = "urn:xmpp:ping"
+	ElementName    = NS + " ping"
+	EncodedElement = `<ping xmlns='urn:xmpp:ping'/>`
 )
 
 type IQGet struct {
