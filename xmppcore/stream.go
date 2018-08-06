@@ -32,6 +32,10 @@ type AuthenticatedStreamFeatures struct {
 //
 // To add application-specific condition element, embed this
 // struct into application-specific stream error struct.
+//
+//TODO:FIXME: this will properly generate a valid XML, but
+// this struct can't be used to unmarshal the generated
+// XML. See: https://github.com/golang/go/issues/9519
 type StreamError struct {
 	XMLName   xml.Name `xml:"stream:error"`
 	Condition StreamErrorCondition
