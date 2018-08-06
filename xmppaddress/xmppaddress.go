@@ -1,5 +1,5 @@
 // Package xmppaddress contains constants and structs
-// to support XEP-0333 - Extended Stanza Addressing
+// to support XEP-0033 - Extended Stanza Addressing
 package xmppaddress
 
 import (
