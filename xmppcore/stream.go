@@ -12,18 +12,12 @@ const (
 
 // RFC 6120 § 4.3.2  Streams Features Format
 
-type NegotiationStreamFeatures struct {
-	XMLName    xml.Name        `xml:"stream:features"`
-	Mechanisms *SASLMechanisms `xml:"mechanisms,omitempty"`
-	//TODO: TLS
-	//TODO: allow mods to provide more features
-}
-
-// AuthenticatedStreamFeatures is used in the second stream
-type AuthenticatedStreamFeatures struct {
+// StreamsFeatures is the element to advertise available
+// features of a stream. Because the features vary between
+// applications, this struct here is meant to be embedded
+// into application-specefic structs.
+type StreamFeatures struct {
 	XMLName xml.Name `xml:"stream:features"`
-	Bind    BindBind `xml:"bind"`
-	//TODO: get more features from the mods
 }
 
 // RFC 6120 § 4.9  Stream Errors
@@ -53,18 +47,18 @@ func (streamError StreamError) String() string {
 	return condition
 }
 
-// InboundStreamError is a struct used as the unmarshal
-// receiver for inbound stream errors. We need this
-// to be separated from StreamError because Go's
-// stdlib XML codec doesn't fully support namespace
-// well.
-type InboundStreamError struct {
-	XMLName   xml.Name `xml:"http://etherx.jabber.org/streams error"`
+// BareStreamError is a struct used as the unmarshal
+// receiver for inbound stream errors in context
+// of a XMPP stream. We need this to be separated from
+// StreamError because Go's stdlib XML encoding library
+// doesn't fully support namespace well.
+type BareStreamError struct {
+	XMLName   xml.Name `xml:"error"`
 	Condition StreamErrorCondition
 	Text      string `xml:"text,omitempty"`
 }
 
-func (streamError InboundStreamError) String() string {
+func (streamError BareStreamError) String() string {
 	condition := streamError.Condition.XMLName.Local
 	if condition == "" {
 		condition = "undefined-condition"
@@ -95,6 +89,5 @@ var (
 )
 
 func streamErrorCondition(local string) StreamErrorCondition {
-	// Without NS?
 	return StreamErrorCondition{xml.Name{Space: StreamsNS, Local: local}}
 }
