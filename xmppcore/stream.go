@@ -53,6 +53,28 @@ func (streamError StreamError) String() string {
 	return condition
 }
 
+// InboundStreamError is a struct used as the unmarshal
+// receiver for inbound stream errors. We need this
+// to be separated from StreamError because Go's
+// stdlib XML codec doesn't fully support namespace
+// well.
+type InboundStreamError struct {
+	XMLName   xml.Name `xml:"http://etherx.jabber.org/streams error"`
+	Condition StreamErrorCondition
+	Text      string `xml:"text,omitempty"`
+}
+
+func (streamError InboundStreamError) String() string {
+	condition := streamError.Condition.XMLName.Local
+	if condition == "" {
+		condition = "undefined-condition"
+	}
+	if streamError.Text != "" {
+		return condition + ": " + streamError.Text
+	}
+	return condition
+}
+
 // StreamErrorCondition holds condition information about a stream error.
 //
 // Per latest revision of RFC 6120, stream error conditions are empty elements.
@@ -73,5 +95,6 @@ var (
 )
 
 func streamErrorCondition(local string) StreamErrorCondition {
+	// Without NS?
 	return StreamErrorCondition{xml.Name{Space: StreamsNS, Local: local}}
 }
