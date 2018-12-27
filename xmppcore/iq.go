@@ -18,6 +18,7 @@ const (
 	IQTypeError  = "error"
 )
 
+// ClientIQ represents basic client IQ.
 type ClientIQ struct {
 	XMLName xml.Name     `xml:"jabber:client iq"`
 	ID      string       `xml:"id,attr,omitempty"`
@@ -26,4 +27,14 @@ type ClientIQ struct {
 	To      *JID         `xml:"to,attr,omitempty"`
 	Payload []byte       `xml:",innerxml"` //TODO:FIXME: this would contain all child elements
 	Error   *StanzaError `xml:",omitempty"`
+}
+
+// HasFrom returns true if 'from' is provided and not empty.
+func (clientIQ *ClientIQ) HasFrom() bool {
+	return clientIQ != nil && clientIQ.From != nil && !client.From.IsEmpty()
+}
+
+// HasTo returns true if 'to' is provided and not empty.
+func (clientIQ *ClientIQ) HasTo() bool {
+	return clientIQ != nil && clientIQ.To != nil && !clientIQ.To.IsEmpty()
 }
