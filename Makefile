@@ -3,7 +3,7 @@
 PKG_PATH = github.com/exavolt/go-xmpplib
 DEP_IMAGE ?= go-xmpplib-dep
 TESTER_IMAGE ?= go-xmpplib-tester
-GOLANG_IMAGE ?= golang:1.10
+GOLANG_IMAGE ?= golang:1.11
 
 fmt:
 	docker run --rm \

@@ -1,4 +1,4 @@
-FROM golang:1.10
+FROM golang:1.11
 
 # Get dep
 RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
