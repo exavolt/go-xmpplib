@@ -31,7 +31,7 @@ type ClientIQ struct {
 
 // HasFrom returns true if 'from' is provided and not empty.
 func (clientIQ *ClientIQ) HasFrom() bool {
-	return clientIQ != nil && clientIQ.From != nil && !client.From.IsEmpty()
+	return clientIQ != nil && clientIQ.From != nil && !clientIQ.From.IsEmpty()
 }
 
 // HasTo returns true if 'to' is provided and not empty.
