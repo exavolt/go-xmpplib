@@ -53,9 +53,9 @@ func (streamError StreamError) String() string {
 // StreamError because Go's stdlib XML encoding library
 // doesn't fully support namespace well.
 type BareStreamError struct {
-	XMLName   xml.Name `xml:"error"`
-	Condition StreamErrorCondition
-	Text      string `xml:"text,omitempty"`
+	XMLName   xml.Name             `xml:"error"`
+	Condition StreamErrorCondition `xml:",any"` // Not the ideal, but works
+	Text      string               `xml:"text,omitempty"`
 }
 
 func (streamError BareStreamError) String() string {

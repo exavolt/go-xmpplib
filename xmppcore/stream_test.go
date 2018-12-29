@@ -26,3 +26,14 @@ func TestStreamErrorBasic(t *testing.T) {
 		`<stream:error><bad-format xmlns="urn:ietf:params:xml:ns:xmpp-streams"></bad-format></stream:error>`,
 		string(xmlBuf))
 }
+
+func TestBareStreamErrorUnmarshal(t *testing.T) {
+	var streamError BareStreamError
+	err := xml.Unmarshal([]byte(`<stream:error><bad-format xmlns="urn:ietf:params:xml:ns:xmpp-streams"></bad-format></stream:error>`), &streamError)
+	assert.Nil(t, err)
+	assert.Equal(t,
+		BareStreamError{
+			XMLName:   xml.Name{Space: "stream", Local: "error"},
+			Condition: streamErrorCondition("bad-format"),
+		}, streamError)
+}
