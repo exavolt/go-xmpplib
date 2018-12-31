@@ -4,6 +4,7 @@ package xmppversion
 
 import (
 	"encoding/xml"
+	"fmt"
 )
 
 const (
@@ -21,4 +22,9 @@ type IQQueryResult struct {
 	Name    string   `xml:"name"`
 	Version string   `xml:"version"`
 	OS      string   `xml:"os,omitempty"`
+}
+
+func (result IQQueryResult) String() string {
+	return fmt.Sprintf("name=%q version=%q os=%q",
+		result.Name, result.Version, result.OS)
 }
