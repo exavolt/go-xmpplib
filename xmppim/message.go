@@ -22,10 +22,10 @@ const (
 	MessageTypeNormal    = "normal"
 )
 
-// ClientMessageAttributes is the base structure for a message stanza. It defines
-// all standard attributes.
-type ClientMessageAttributes struct {
-	xmppcore.StanzaCommonAttributes
+// ClientMessageBaseAttributes is the base structure for a message stanza.
+// It defines all standard attributes.
+type ClientMessageBaseAttributes struct {
+	xmppcore.StanzaBaseAttributes
 	XMLName xml.Name `xml:"jabber:client message"`
 	Type    string   `xml:"type,attr,omitempty"` // Any of MessageType*
 }
@@ -33,7 +33,7 @@ type ClientMessageAttributes struct {
 // ClientMessage is a data structure for a message stanza. It contains
 // all standard attributes and sub-elements.
 type ClientMessage struct {
-	ClientMessageAttributes
+	ClientMessageBaseAttributes
 	Error   *xmppcore.StanzaError  `xml:",omitempty"`
 	Body    []ClientMessageBody    `xml:"body"`
 	Subject []ClientMessageSubject `xml:"subject"`

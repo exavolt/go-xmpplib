@@ -20,11 +20,9 @@ const (
 
 // ClientIQ represents basic client IQ.
 type ClientIQ struct {
+	StanzaBaseAttributes
 	XMLName xml.Name     `xml:"jabber:client iq"`
-	ID      string       `xml:"id,attr,omitempty"`
 	Type    string       `xml:"type,attr"` // Any of IQType*
-	From    *JID         `xml:"from,attr,omitempty"`
-	To      *JID         `xml:"to,attr,omitempty"`
 	Payload []byte       `xml:",innerxml"` //TODO:FIXME: this would contain all child elements
 	Error   *StanzaError `xml:",omitempty"`
 }

@@ -62,7 +62,7 @@ func stanzaErrorCondition(local string) StanzaErrorCondition {
 
 // RFC 6120 § 9.1
 
-type StanzaCommonAttributes struct {
+type StanzaBaseAttributes struct {
 	To   *JID   `xml:"to,attr,omitempty"`
 	From *JID   `xml:"from,attr,omitempty"`
 	ID   string `xml:"id,attr,omitempty"`
