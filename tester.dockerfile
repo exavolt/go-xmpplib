@@ -1,12 +1,11 @@
 FROM golang:1.11
 
-# Get dep
-RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-
-WORKDIR /go/src/github.com/exavolt/go-xmpplib/
+WORKDIR /github.com/exavolt/go-xmpplib/
 
 # Get the dependencies so it can be cached into a layer
-COPY Gopkg.lock Gopkg.toml ./
-RUN dep ensure -v -vendor-only
+COPY go.mod go.sum ./
+RUN go mod download
+
+ENV GO111MODULE=on
 
 ENTRYPOINT [ "go" ]

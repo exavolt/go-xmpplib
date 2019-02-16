@@ -1,26 +1,27 @@
 .PHONY: fmt test update-dependencies
 
 PKG_PATH = github.com/exavolt/go-xmpplib
-DEP_IMAGE ?= go-xmpplib-dep
 TESTER_IMAGE ?= go-xmpplib-tester
 GOLANG_IMAGE ?= golang:1.11
 
 fmt:
-	docker run --rm \
+	@echo "Formatting files..."
+	@docker run --rm \
 		-v $(CURDIR):/go \
 		--entrypoint gofmt \
 		$(GOLANG_IMAGE) -w -l -s .
 
 test:
-	docker build -t $(TESTER_IMAGE) -f tester.dockerfile .
-	docker run --rm \
+	@echo "Running unit tests..."
+	@docker build -t $(TESTER_IMAGE) -f tester.dockerfile . > /dev/null
+	@docker run --rm \
 		-v $(CURDIR):/go/src/$(PKG_PATH) \
 		--workdir /go/src/$(PKG_PATH) \
 		$(TESTER_IMAGE) test ./...
 
 update-dependencies:
-	docker build -t $(DEP_IMAGE) -f dep.dockerfile .
-	docker run --rm \
-		-v $(CURDIR):/go/src/$(PKG_PATH) \
-		--workdir /go/src/$(PKG_PATH) \
-		$(DEP_IMAGE) ensure -update -v
+	@echo "Updating all dependencies..."
+	@docker run --rm \
+		-v $(CURDIR):/$(PKG_PATH) \
+		--workdir /$(PKG_PATH) \
+		$(GOLANG_IMAGE) /bin/sh -c "go get -u all && go mod tidy"
