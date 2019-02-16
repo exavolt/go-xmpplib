@@ -12,8 +12,9 @@ fmt:
 		$(GOLANG_IMAGE) -w -l -s .
 
 test:
-	@echo "Running unit tests..."
+	@echo "Preparing test runner..."
 	@docker build -t $(TESTER_IMAGE) -f tester.dockerfile . > /dev/null
+	@echo "Executing unit tests..."
 	@docker run --rm \
 		-v $(CURDIR):/go/src/$(PKG_PATH) \
 		--workdir /go/src/$(PKG_PATH) \
