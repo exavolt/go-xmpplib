@@ -1,8 +1,8 @@
-.PHONY: fmt test update-dependencies
+.PHONY: fmt test deps-up
 
-PKG_PATH = github.com/exavolt/go-xmpplib
+PKG_PATH = github.com/rez-go/xmpplib
 TESTER_IMAGE ?= go-xmpplib-tester
-GOLANG_IMAGE ?= golang:1.11
+GOLANG_IMAGE ?= golang:1.14
 
 fmt:
 	@echo "Formatting files..."
@@ -20,7 +20,7 @@ test:
 		--workdir /go/src/$(PKG_PATH) \
 		$(TESTER_IMAGE) test ./...
 
-update-dependencies:
+deps-up:
 	@echo "Updating all dependencies..."
 	@docker run --rm \
 		-v $(CURDIR):/$(PKG_PATH) \

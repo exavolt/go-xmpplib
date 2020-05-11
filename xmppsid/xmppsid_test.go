@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/exavolt/go-xmpplib/xmppcore"
+	"github.com/rez-go/xmpplib/xmppcore"
 )
 
 func TestMarshalEmptyStanzaID(t *testing.T) {

@@ -3,7 +3,7 @@ package xmppim
 import (
 	"encoding/xml"
 
-	"github.com/exavolt/go-xmpplib/xmppcore"
+	"github.com/rez-go/xmpplib/xmppcore"
 )
 
 const (

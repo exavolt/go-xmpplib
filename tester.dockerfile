@@ -1,6 +1,6 @@
-FROM golang:1.11
+FROM golang:1.14
 
-WORKDIR /github.com/exavolt/go-xmpplib/
+WORKDIR /github.com/rez-go/xmpplib/
 
 # Get the dependencies so it can be cached into a layer
 COPY go.mod go.sum ./

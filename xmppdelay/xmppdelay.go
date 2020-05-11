@@ -5,7 +5,7 @@ import (
 	"encoding/xml"
 	"time"
 
-	"github.com/exavolt/go-xmpplib/xmppcore"
+	"github.com/rez-go/xmpplib/xmppcore"
 )
 
 const (
